@@ -2,7 +2,7 @@ const {mongoose} = require('../../config/db');
 const { friend } = require('../../models/friend');
 const { validationResult } = require('express-validator');
 
-var adminController = (req,res)=>{
+var adminController =async(req,res)=>{
 
     let data = {
         name: req.query.name,
@@ -12,7 +12,7 @@ var adminController = (req,res)=>{
     let error = validationResult(req);
 
     if (error.isEmpty()) {
-        const frieendObj = new friend(data);
+        const frieendObj = await new friend(data);
         frieendObj.save().then(() => {
             res.status(200).json({
                 'msg':"done"
