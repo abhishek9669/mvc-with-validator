@@ -1,19 +1,37 @@
 const {mongoose} = require('../../config/db');
-const { Cat } = require('../../models/cat');
+const { friend } = require('../../models/friend');
+const { validationResult } = require('express-validator');
 
 var adminController = (req,res)=>{
 
-    const kitty = new Cat({ name: req.query.name });
-    kitty.save().then(() => {
-        res.status(200).json({
-            'msg':"done"
+    let data = {
+        name: req.query.name,
+        surname:req.query.surname
+    }
+
+    let error = validationResult(req);
+
+    if (error.isEmpty()) {
+        const frieendObj = new friend(data);
+        frieendObj.save().then(() => {
+            res.status(200).json({
+                'msg':"done"
+            });
+        }).catch(e=>{
+            res.status(400).json({
+                'msg':"error",
+               
+            });
         });
-    }).catch(e=>{
+
+    }else{
         res.status(400).json({
-            'msg':"error",
+            'msg':"validation error",
            
         });
-    });
+
+    }
+  
 
     
 }
