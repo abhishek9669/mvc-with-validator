@@ -5,8 +5,8 @@ mongoose.connect(`mongodb+srv://${process.env.MONGOOSE_USER}:${process.env.MONGO
 .then((s)=>{
     console.log("coonected")
 
-}).catch((err)=>{
-    console.log(err)
+}).catch((error)=>{
+    console.log(error)
 });
 
 exports.mongoose = mongoose;
