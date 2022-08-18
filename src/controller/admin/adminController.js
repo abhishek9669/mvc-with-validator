@@ -26,7 +26,7 @@ var adminController = (req,res)=>{
 
     }else{
         res.status(400).json({
-            'msg':"validation error",
+            'msg':"name and surname is requird ",
            
         });
 
